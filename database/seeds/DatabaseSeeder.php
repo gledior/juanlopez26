@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
         $this->call('MonedaSeeder'::class);
         $this->call('Art_categoriaSeeder'::class);
         $this->call('Art_sub_categoriaSeeder'::class);
+        $this->call('ArticulosSeeder'::class);
     }
 }

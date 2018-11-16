@@ -1,9 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Articulos;
+use App\Moneda;
+use App\Art_categoria;
+use App\Art_Sub_categoria;
+use App\Http\Requests\ArticuloRequest;
 
 class ArticulosController extends Controller
 {
@@ -26,7 +29,10 @@ class ArticulosController extends Controller
      */
     public function create()
     {
-
+         $moneda=Moneda::all()->pluck('simbolo','id');
+         $categoria=Art_categoria::all()->pluck('categoria','id');
+         $sub_categoria=Art_Sub_categoria::all()->pluck('sub_categoria','id');
+        return view('articulos.create',compact('articulo','moneda','sub_categoria','categoria'));
     }
 
     /**
@@ -35,9 +41,23 @@ class ArticulosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ArticuloRequest $request)
     {
-        //
+        $articulo=new Articulos;
+
+        $articulo->articulo=$request->articulo;
+        $articulo->cod_articulo=$request->cod_articulo;
+        $articulo->art_categoria_id=$request->categorias;
+        $articulo->sub_categoria_di=$request->sub_categorias;
+        $articulo->stock=$request->stock;
+        $articulo->stock_min=$request->stock_min;
+        $articulo->stock_max=$request->stock_max;
+        $articulo->valor_unidad=$request->valor_unidad;
+        $articulo->moneda_id=$request->simbolo;
+
+        $articulo->save();
+
+        return redirect()->route('articulos.index')->with('info','El articulo fue creado');
     }
 
     /**
@@ -60,7 +80,12 @@ class ArticulosController extends Controller
      */
     public function edit($id)
     {
-        //
+         $articulo=Articulos::find($id);
+         $moneda=Moneda::all()->pluck('simbolo','id');
+         $categoria=Art_categoria::all()->pluck('categoria','id');
+         $sub_categoria=Art_Sub_categoria::all()->pluck('sub_categoria','id');
+        return view('articulos.edit',compact('articulo','moneda','sub_categoria','categoria'));
+    
     }
 
     /**
@@ -70,9 +95,23 @@ class ArticulosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ArticuloRequest $request, $id)
     {
-        //
+        $articulo=Articulos::find($id);
+
+        $articulo->articulo=$request->articulo;
+        $articulo->cod_articulo=$request->cod_articulo;
+        $articulo->art_categoria_id=$request->categorias;
+        $articulo->sub_categoria_di=$request->sub_categorias;
+        $articulo->stock=$request->stock;
+        $articulo->stock_min=$request->stock_min;
+        $articulo->stock_max=$request->stock_max;
+        $articulo->valor_unidad=$request->valor_unidad;
+        $articulo->moneda_id=$request->simbolo;
+
+        $articulo->save();
+
+        return redirect()->route('articulos.index')->with('info','El articulo fue actualizado');
     }
 
     /**

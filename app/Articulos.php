@@ -16,7 +16,7 @@ class Articulos extends Model
 		}
 		public function art_sub_categoria(){
 
-			return $this->belongsTo('App\Art_Sub_categoria','art_subcategoria_id');	
+			return $this->belongsTo('App\Art_Sub_categoria','sub_categoria_di');	
 
 		}
 		public function moneda(){

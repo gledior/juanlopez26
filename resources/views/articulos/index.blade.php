@@ -3,6 +3,7 @@
 @section("list-articulos")
          <div class="col-sm-8">
    		<h2>Listado de Productos</h2>
+         @include ('articulos.fragment.info')
    		<a href="{{ route('articulos.create')}}" class="btn btn-primary pull-right">Nuevo</a>
 
    		<table class="table table-hover tabled-striped">
@@ -16,8 +17,9 @@
    				<tr>
    					<td>{{$articulo->id}}</td>
    					<td>{{$articulo->articulo}}</td>
-   					<td><a href="{{route('articulos.show', $articulo->id)}}">ver</a> </td>
-   					<td>editar</td>
+                  <td>{{$articulo->cod_articulo}}</td>
+   					<td><a href="{{route('articulos.show', $articulo->id)}}" class="btn btn-link">ver</a> </td>
+   					<td><a href="{{route('articulos.edit', $articulo->id)}}" class="btn btn-link">editar</a> </td>
    					<td>
                      <form action="{{route('articulos.destroy',$articulo->id)}}" method="post">
                      {!!csrf_field()!!}
@@ -33,8 +35,7 @@
          </div>
 
           <div class="col-sm-4">
-         	
-
+         
 
          </div>
 @endsection

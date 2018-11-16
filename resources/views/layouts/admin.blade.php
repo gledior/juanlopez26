@@ -243,8 +243,8 @@ desired effect
               </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#">Link in level 2</a></li>
-            <li><a href="#">Link in level 2</a></li>
+            <li><a href="{{ route('articulos.index')}}">Articulos</a></li>
+           
           </ul>
         </li>
       </ul>
