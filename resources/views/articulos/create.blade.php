@@ -15,9 +15,9 @@
         @include('articulos.fragment.error')
         
             <div class="col-md-6">
-             {!! Form::open (['route'=> ['articulos.store'], 'method'=>'POST']) !!}
+             {!! Form::open (['route'=> ['articulos.store'], 'method'=>'POST','files' => true]) !!}
 
-             @include ('articulos.fragment.form')
+             @include ('articulos.fragment.form2')
 
              {!! Form::close()!!}
         </div>

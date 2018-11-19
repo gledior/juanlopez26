@@ -10,4 +10,3 @@
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
      Both of these plugins are recommended to enhance the
      user experience. -->
-<script src="{{asset('js/iziToast.min.css')}}"></script>

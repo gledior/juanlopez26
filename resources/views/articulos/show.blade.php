@@ -17,6 +17,11 @@
             <label>Sub-categoria:</label>
               <h4> {{$articulo->art_sub_categoria->sub_categoria}}</h4>
             </div>
+
+            <div class="col-md-6">
+            <label></label>
+              <img class="card-img-top" src="../public/app/public/articulos_img/{{$articulo->imagen}}">
+            </div>
          </div>
 
             <br>

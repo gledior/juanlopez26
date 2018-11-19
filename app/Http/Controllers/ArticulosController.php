@@ -7,6 +7,7 @@ use App\Moneda;
 use App\Art_categoria;
 use App\Art_Sub_categoria;
 use App\Http\Requests\ArticuloRequest;
+use Illuminate\Support\Facades\Storage;
 
 class ArticulosController extends Controller
 {
@@ -29,10 +30,10 @@ class ArticulosController extends Controller
      */
     public function create()
     {
-         $moneda=Moneda::all()->pluck('simbolo','id');
-         $categoria=Art_categoria::all()->pluck('categoria','id');
-         $sub_categoria=Art_Sub_categoria::all()->pluck('sub_categoria','id');
-        return view('articulos.create',compact('articulo','moneda','sub_categoria','categoria'));
+        $moneda=Moneda::all()->pluck('simbolo','id');
+        $categoria=Art_categoria::all()->pluck('categoria','id');
+        $sub_categoria=Art_Sub_categoria::all()->pluck('sub_categoria','id');
+        return view('articulos.create',compact('moneda','sub_categoria','categoria'));
     }
 
     /**
@@ -41,8 +42,15 @@ class ArticulosController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ArticuloRequest $request)
+    public function store(Request $request)
     {
+         
+         if($request->file('image')){
+           $path = Storage::disk('public')->put('articulos',  $request->file('image'));
+           $file=asset($path);
+            //$archivo=class_basename($file);
+        }
+
         $articulo=new Articulos;
 
         $articulo->articulo=$request->articulo;
@@ -54,7 +62,8 @@ class ArticulosController extends Controller
         $articulo->stock_max=$request->stock_max;
         $articulo->valor_unidad=$request->valor_unidad;
         $articulo->moneda_id=$request->simbolo;
-
+        
+        $articulo->imagen= $file;
         $articulo->save();
 
         return redirect()->route('articulos.index')->with('info','El articulo fue creado');

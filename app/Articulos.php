@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Articulos extends Model
 {
     public $table='articulos';
-    protected $fillable=['articulo','cod_articulo','art_categoria_id','art_subcategoria_id','stock','stock_min','stock_max','valor_unidad','moneda_id','descripcion'];
+    protected $fillable=['articulo','cod_articulo','art_categoria_id','art_subcategoria_id','stock','stock_min','stock_max','valor_unidad','moneda_id','imagen'];
 
 		public function art_categoria(){
 

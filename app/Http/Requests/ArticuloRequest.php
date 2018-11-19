@@ -24,12 +24,12 @@ class ArticuloRequest extends FormRequest
     public function rules()
     {
         return [
-            'articulos' => 'requiere',
+            /*'articulos' => 'requiere',
             'cod_articulo' => 'numeric|required|max:888888888',
             'stock' => 'numeric|required|integer',
             'stock_min' => 'numeric|required|integer',
             'stock_max' => 'numeric|required|integer',
-            'valor_unidad' => 'numeric|required'
+            'valor_unidad' => 'numeric|required'*/
         ];
     }
 

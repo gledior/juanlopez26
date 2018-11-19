@@ -32,5 +32,9 @@
       {!! Form::select('simbolo', $moneda, null, ['class' => 'form-control  sub']) !!}
 </div>
 <div class="form-group">
+    {{ Form::label('image', 'Imagen',['class' => 'custom-file-label']) }}
+    {{ Form::file('image',['class' => 'custom-file-input']) }}
+</div>
+<div class="form-group">
       {!! Form::submit('Enviar', ['class' => 'btn btn-primary boton']) !!}
 </div>
