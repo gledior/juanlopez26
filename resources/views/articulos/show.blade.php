@@ -20,7 +20,7 @@
 
             <div class="col-md-6">
             <label></label>
-              <img class="card-img-top" src="../public/app/public/articulos_img/{{$articulo->imagen}}">
+              <img class="card-img-top" src="{{asset($articulo->imagen)}}">
             </div>
          </div>
 

@@ -19,8 +19,11 @@ class ArticulosController extends Controller
     public function index()
     {
         $articulos=Articulos::orderBy('id','asc')->paginate();
-       // print_r($articulos);
-        return view('articulos.index',compact('articulos'));
+        $total=stock($articulos);
+        $var=1;
+        //print_r($articulos);
+        return view('articulos.index',compact('articulos','var','total'));
+        
     }
 
     /**
@@ -45,13 +48,21 @@ class ArticulosController extends Controller
     public function store(Request $request)
     {
          
-         if($request->file('image')){
-           $path = Storage::disk('public')->put('articulos',  $request->file('image'));
-           $file=asset($path);
-            //$archivo=class_basename($file);
-        }
 
-        $articulo=new Articulos;
+        /* if($request->file('image')){
+              $file = $request->file('image');
+            $nombre = $file->getClientOriginalName();
+
+            Storage::disk('public')->put($nombre,  \File::get($file));
+        
+        }*/
+        
+        if($request->file('image')){
+            $path = Storage::disk('public')->put('articulos_img',  $request->file('image'));
+        }
+      
+
+      $articulo=new Articulos;
 
         $articulo->articulo=$request->articulo;
         $articulo->cod_articulo=$request->cod_articulo;
@@ -63,7 +74,7 @@ class ArticulosController extends Controller
         $articulo->valor_unidad=$request->valor_unidad;
         $articulo->moneda_id=$request->simbolo;
         
-        $articulo->imagen= $file;
+        $articulo->imagen= $path;
         $articulo->save();
 
         return redirect()->route('articulos.index')->with('info','El articulo fue creado');
